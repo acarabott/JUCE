@@ -2,17 +2,16 @@
   ==============================================================================
 
    This file is part of the JUCE library.
-   Copyright (c) 2017 - ROLI Ltd.
+   Copyright (c) 2020 - Raw Material Software Limited
 
    JUCE is an open source library subject to commercial or open-source
    licensing.
 
-   By using JUCE, you agree to the terms of both the JUCE 5 End-User License
-   Agreement and JUCE 5 Privacy Policy (both updated and effective as of the
-   27th April 2017).
+   By using JUCE, you agree to the terms of both the JUCE 6 End-User License
+   Agreement and JUCE Privacy Policy (both effective as of the 16th June 2020).
 
-   End User License Agreement: www.juce.com/juce-5-licence
-   Privacy Policy: www.juce.com/juce-5-privacy-policy
+   End User License Agreement: www.juce.com/juce-6-licence
+   Privacy Policy: www.juce.com/juce-privacy-policy
 
    Or: You may also use this code under the terms of the GPL v3 (see
    www.gnu.org/licenses).
@@ -107,22 +106,9 @@ public:
 
     //==============================================================================
     forcedinline uint8 getAlpha() const noexcept      { return components.a; }
-    forcedinline uint8 getRed() const noexcept        { return components.r; }
+    forcedinline uint8 getRed()   const noexcept      { return components.r; }
     forcedinline uint8 getGreen() const noexcept      { return components.g; }
-    forcedinline uint8 getBlue() const noexcept       { return components.b; }
-
-   #if JUCE_GCC
-    // NB these are here as a workaround because GCC refuses to bind to packed values.
-    forcedinline uint8& getAlpha() noexcept           { return comps [indexA]; }
-    forcedinline uint8& getRed() noexcept             { return comps [indexR]; }
-    forcedinline uint8& getGreen() noexcept           { return comps [indexG]; }
-    forcedinline uint8& getBlue() noexcept            { return comps [indexB]; }
-   #else
-    forcedinline uint8& getAlpha() noexcept           { return components.a; }
-    forcedinline uint8& getRed() noexcept             { return components.r; }
-    forcedinline uint8& getGreen() noexcept           { return components.g; }
-    forcedinline uint8& getBlue() noexcept            { return components.b; }
-   #endif
+    forcedinline uint8 getBlue()  const noexcept      { return components.b; }
 
     //==============================================================================
     /** Copies another pixel colour over this one.
@@ -341,9 +327,6 @@ private:
     {
         uint32 internal;
         Components components;
-       #if JUCE_GCC
-        uint8 comps[4];  // helper struct needed because gcc does not allow references to packed union members
-       #endif
     };
 }
 #ifndef DOXYGEN
@@ -428,13 +411,9 @@ public:
 
     //==============================================================================
     forcedinline uint8 getAlpha() const noexcept    { return 0xff; }
-    forcedinline uint8 getRed() const noexcept      { return r; }
+    forcedinline uint8 getRed()   const noexcept    { return r; }
     forcedinline uint8 getGreen() const noexcept    { return g; }
-    forcedinline uint8 getBlue() const noexcept     { return b; }
-
-    forcedinline uint8& getRed() noexcept           { return r; }
-    forcedinline uint8& getGreen() noexcept         { return g; }
-    forcedinline uint8& getBlue() noexcept          { return b; }
+    forcedinline uint8 getBlue()  const noexcept    { return b; }
 
     //==============================================================================
     /** Copies another pixel colour over this one.
@@ -651,11 +630,9 @@ public:
 
     //==============================================================================
     forcedinline uint8 getAlpha() const noexcept    { return a; }
-    forcedinline uint8& getAlpha() noexcept         { return a; }
-
-    forcedinline uint8 getRed() const noexcept      { return 0; }
+    forcedinline uint8 getRed()   const noexcept    { return 0; }
     forcedinline uint8 getGreen() const noexcept    { return 0; }
-    forcedinline uint8 getBlue() const noexcept     { return 0; }
+    forcedinline uint8 getBlue()  const noexcept    { return 0; }
 
     //==============================================================================
     /** Copies another pixel colour over this one.
